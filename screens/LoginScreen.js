@@ -72,20 +72,11 @@ export default withNavigation(
       navigate('MainNavigator');
     }
 
-    login(id, pw) {
-      this.setState({ logging: true });
-      console.log(id, pw);
-      setTimeout(this.loginSuccess.bind(this), 3000);
-    }
-
-    onSubmitInfo({ nativeEvent: text }, section = 'pw') {
-      this.setState({ [section]: text });
+    login() {
       const { id, pw } = this.state;
-      if (section === 'id') {
-        this.passwordInput.focus();
-      } else {
-        this.login(id, pw);
-      }
+      this.setState({ logging: true });
+      console.log('ID, PW 로그인 함수:', id, pw);
+      setTimeout(this.loginSuccess.bind(this), 3000);
     }
 
     render() {
@@ -93,22 +84,29 @@ export default withNavigation(
         <Container>
           <InputContainer>
             <Id
+              value={this.state.id}
+              onChangeText={id => this.setState({ id })}
               placeholder="ID"
               returnKeyType="next"
               textContentType="username"
               autoCapitalize="none"
               autoCorrect={false}
-              onSubmitEditing={e => this.onSubmitInfo(e, 'id').bind(this)}
+              onSubmitEditing={() => {
+                this.passwordInput.focus();
+              }}
             />
             <Pw
+              value={this.state.pw}
               ref={ref => {
                 this.passwordInput = ref;
               }}
+              onChangeText={pw => this.setState({ pw })}
               placeholder="PW"
               returnKeyType="done"
               textContentType="password"
               autoCapitalize="none"
               autoCorrect={false}
+              onSubmitEditing={this.login.bind(this)}
             />
             <LoginButton onPress={this.login.bind(this)}>
               <LoginText color="white">
