@@ -7,4 +7,12 @@ const TINT_COLOR = '#415A79';
 const TEXT_COLOR = '#415A79';
 const POPUP_COLOR = '#A5C9EB';
 
-export default { MAIN_COLOR, TINT_COLOR, TEXT_COLOR, POPUP_COLOR };
+const UNSELECTED_ICON = '#dfdfdf';
+
+export default {
+  UNSELECTED_ICON,
+  MAIN_COLOR,
+  TINT_COLOR,
+  TEXT_COLOR,
+  POPUP_COLOR
+};

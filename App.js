@@ -1,14 +1,32 @@
 import React from 'react';
-import LoginCheckNavigator from './navigators/LoginCheckNavigator';
-import styled from 'styled-components';
+import { AppLoading, Asset } from 'expo';
 
-const Container = styled.SafeAreaView`
-  background-color: transparent;
-  flex: 1;
-`;
+import LoginCheckNavigator from './navigators/LoginCheckNavigator';
+import Icon from './components/Icon';
 
 export default class App extends React.Component {
+  state = {
+    loading: true
+  };
+
+  handleError = e => console.error(e);
+  handleLoaded = () => this.setState({ loading: false });
+  loadAssets = async () => {
+    await Asset.loadAsync(...Object.values(Icon));
+  };
+
   render() {
-    return <LoginCheckNavigator />;
+    const { loading } = this.state;
+    if (loading) {
+      return (
+        <AppLoading
+          startAsync={this.loadAssets}
+          onFinish={this.handleLoaded}
+          onError={this.handleError}
+        />
+      );
+    } else {
+      return <LoginCheckNavigator />;
+    }
   }
 }
