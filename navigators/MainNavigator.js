@@ -14,21 +14,39 @@ export default createBottomTabNavigator(
       screen: Meeting,
       navigationOptions: {
         title: '미팅',
-        tabBarIcon: ({ focused }) => null
+        tabBarIcon: ({ focused }) => (
+          <TabBarIcon
+            name="meeting"
+            size={24}
+            color={focused ? colors.TINT_COLOR : colors.UNSELECTED_ICON}
+          />
+        )
       }
     },
     Chat: {
       screen: Chat,
       navigationOptions: {
         title: '채팅',
-        tabBarIcon: ({ focused }) => null
+        tabBarIcon: ({ focused }) => (
+          <TabBarIcon
+            name="chat"
+            size={24}
+            color={focused ? colors.TINT_COLOR : colors.UNSELECTED_ICON}
+          />
+        )
       }
     },
     Profile: {
       screen: Profile,
       navigationOptions: {
         title: '프로필',
-        tabBarIcon: ({ focused }) => null
+        tabBarIcon: ({ focused }) => (
+          <TabBarIcon
+            name="profile"
+            size={24}
+            color={focused ? colors.TINT_COLOR : colors.UNSELECTED_ICON}
+          />
+        )
       }
     },
     Setting: {
@@ -50,6 +68,8 @@ export default createBottomTabNavigator(
       inactiveTintColor: colors.UNSELECTED_ICON,
       activeTintColor: colors.TINT_COLOR,
       style: {
+        paddingTop: 10,
+        height: 50,
         backgroundColor: colors.MAIN_COLOR
       }
     }

@@ -15,7 +15,7 @@ export default class extends React.PureComponent {
     const {
       navigation: { navigate }
     } = this.props;
-    setTimeout(() => navigate('LoginScreen'), 3000);
+    setTimeout(() => navigate('LoginScreen'), 1000);
   }
 
   render() {

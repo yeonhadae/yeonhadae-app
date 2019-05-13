@@ -76,7 +76,7 @@ export default withNavigation(
       const { id, pw } = this.state;
       this.setState({ logging: true });
       console.log('ID, PW 로그인 함수:', id, pw);
-      setTimeout(this.loginSuccess.bind(this), 3000);
+      setTimeout(this.loginSuccess.bind(this), 1000);
     }
 
     render() {
