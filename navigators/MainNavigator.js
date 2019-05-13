@@ -13,11 +13,24 @@ export default createBottomTabNavigator(
     Meeting: {
       screen: Meeting,
       navigationOptions: {
+        title: '미팅',
         tabBarIcon: ({ focused }) => null
       }
     },
-    Chat,
-    Profile,
+    Chat: {
+      screen: Chat,
+      navigationOptions: {
+        title: '채팅',
+        tabBarIcon: ({ focused }) => null
+      }
+    },
+    Profile: {
+      screen: Profile,
+      navigationOptions: {
+        title: '프로필',
+        tabBarIcon: ({ focused }) => null
+      }
+    },
     Setting: {
       screen: Setting,
       navigationOptions: {
