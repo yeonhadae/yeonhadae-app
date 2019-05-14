@@ -27,4 +27,4 @@ function reducer(state = initialState, action) {
 
 // Default Reducer export
 
-export default reduce;
+export default reducer;
