@@ -4,6 +4,8 @@ import { AppLoading, Asset } from "expo";
 import LoginCheckNavigator from "./navigators/LoginCheckNavigator";
 import Icon from "./components/Icon";
 
+const { persistor, store } = configureStore();
+
 export default class App extends React.Component {
   state = {
     loading: true
@@ -26,7 +28,13 @@ export default class App extends React.Component {
         />
       );
     } else {
-      return <LoginCheckNavigator />;
+      return (
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <LoginCheckNavigator />
+          </PersistGate>
+        </Provider>
+      );
     }
   }
 }
