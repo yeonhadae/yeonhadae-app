@@ -1,8 +1,8 @@
-import React from 'react';
-import { AppLoading, Asset } from 'expo';
+import React from "react";
+import { AppLoading, Asset } from "expo";
 
-import LoginCheckNavigator from './navigators/LoginCheckNavigator';
-import Icon from './components/Icon';
+import LoginCheckNavigator from "./navigators/LoginCheckNavigator";
+import Icon from "./components/Icon";
 
 export default class App extends React.Component {
   state = {
