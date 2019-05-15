@@ -1,6 +1,8 @@
 import React from "react";
 import { AppLoading, Asset } from "expo";
-
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/es/integration/react";
+import configureStore from "./redux/configureStore";
 import LoginCheckNavigator from "./navigators/LoginCheckNavigator";
 import Icon from "./components/Icon";
 
