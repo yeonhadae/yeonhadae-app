@@ -8,6 +8,7 @@ class AppContainer extends React.Component {
   }
 
   render() {
+    const { isLoggedIn } = this.props;
     return (
       <View>
         <Text>{isLoggedIn ? 'Hello' : 'Who are you'}</Text>
