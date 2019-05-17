@@ -12,7 +12,7 @@ export default createAppContainer(
       CheckLogin
     },
     {
-      initialRouteName: 'CheckLogin'
+      initialRouteName: 'LoginScreen'
     }
   )
 );

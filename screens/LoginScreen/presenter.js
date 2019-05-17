@@ -1,38 +1,134 @@
-import React from "react";
-import styled from "styled-components";
-import { withNavigation } from "react-navigation";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { ActivityIndicator, Image } from 'react-native';
+import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
-import colors from "../../constants/colors";
-import device from "../../constants/device";
+import images, { LoginInputIcon } from '../../components/Icon';
+import colors from '../../constants/colors';
+import device from '../../constants/device';
+
+const getLogoSize = imagesUri => {
+  const result = resolveAssetSource(imagesUri);
+  const { height, width } = result;
+  return { originWidth: width, originHeight: height };
+};
+
+const { width: deviceWidth } = device;
+const { originWidth, originHeight } = getLogoSize(images.logo);
+console.log(originHeight, originWidth);
+const logoWidth = deviceWidth - 50;
+const logoHeight = originHeight * (1 - logoWidth / originWidth);
+
+export default class extends React.Component {
+  static propTypes = {
+    isSubmitting: PropTypes.bool.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    changePassword: PropTypes.func.isRequired,
+    changeUsername: PropTypes.func.isRequired,
+    submit: PropTypes.func.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    console.log(logoWidth, logoHeight);
+    return (
+      <Container>
+        <Logo
+          source={images.logo}
+          resizeMode={'contain'}
+          style={{ width: logoWidth, height: logoHeight }}
+        />
+        <InputContainer>
+          <InputBox>
+            <LoginInputIcon color={colors.TINT_COLOR} name="username" />
+            <Id
+              value={this.props.username}
+              onChangeText={id => this.props.changeUsername(id)}
+              placeholder="ID"
+              returnKeyType="next"
+              textContentType="username"
+              autoCapitalize="none"
+              autoCorrect={false}
+              onSubmitEditing={() => {
+                this.passwordInput.focus();
+              }}
+            />
+          </InputBox>
+          <InputBox>
+            <LoginInputIcon color={colors.TINT_COLOR} name="password" />
+            <Pw
+              value={this.props.password}
+              ref={ref => {
+                this.passwordInput = ref;
+              }}
+              onChangeText={pw => this.props.changePassword(pw)}
+              placeholder="PW"
+              returnKeyType="done"
+              textContentType="password"
+              autoCapitalize="none"
+              autoCorrect={false}
+              onSubmitEditing={this.props.submit}
+              secureTextEntry={true}
+            />
+          </InputBox>
+          <LoginButton onPressOut={this.props.submit}>
+            {!this.props.isSubmitting ? (
+              <LoginText color="white">'로그인'</LoginText>
+            ) : (
+              <ActivityIndicator size="small" color="white" />
+            )}
+          </LoginButton>
+        </InputContainer>
+        <HelpContainer>
+          <HelpButton>
+            <HelpText color="white">회원가입</HelpText>
+          </HelpButton>
+          <HelpButton>
+            <HelpText color="white">아이디 / 비밀번호 찾기</HelpText>
+          </HelpButton>
+        </HelpContainer>
+      </Container>
+    );
+  }
+}
 
 const BtnInterface = styled.TouchableOpacity`
   width: 100%;
-  height: 30px;
+  height: 45px;
   padding: 5px;
-  margin: 5px;
+  margin-vertical: 20px;
   background-color: ${props => props.bgColor || colors.TINT_COLOR};
   justify-content: center;
   align-items: center;
-`;
-
-const TxtInterface = styled.Text`
-  color: ${props => props.color || "white"};
-`;
-
-const InputInterface = styled.TextInput`
-  border-bottom-width: 1px;
-  height: 25px;
-  width: 100%;
-  padding: 5px;
-  margin: 5px;
-  border-color: ${colors.TINT_COLOR};
-  color: ${colors.TEXT_COLOR};
   border-radius: 20px;
 `;
 
+const TxtInterface = styled.Text`
+  color: ${props => props.color || 'white'};
+`;
+
+const InputInterface = styled.TextInput`
+  height: 25px;
+  flex: 0.8
+  color: ${colors.TEXT_COLOR};
+`;
+
 const ComponentContainer = styled.View`
-  width: ${device.width - 40};
+  width: 70%;
+`;
+
+const InputBox = styled.View`
+  border-bottom-width: 1px;
+  height: 25px;
+  flex-direction: row;
+  border-color: ${colors.TINT_COLOR};
+  padding-bottom: 15px;
+  margin: 5px;
 `;
 
 const Id = styled(InputInterface)``;
@@ -51,86 +147,8 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+
   background-color: ${colors.MAIN_COLOR};
 `;
 
-export default withNavigation(
-  class extends React.Component {
-    static propTypes = {
-      isSubmitting: PropTypes.bool.isRequired,
-      username: PropTypes.string.isRequired,
-      password: PropTypes.string.isRequired
-    };
-    constructor(props) {
-      super(props);
-      this.state = {
-        id: "",
-        pw: "",
-        logging: false
-      };
-    }
-
-    loginSuccess() {
-      const {
-        navigation: { navigate }
-      } = this.props;
-
-      navigate("MainNavigator");
-    }
-
-    login() {
-      const { id, pw } = this.state;
-      this.setState({ logging: true });
-      console.log("ID, PW 로그인 함수:", id, pw);
-      setTimeout(this.loginSuccess.bind(this), 1000);
-    }
-
-    render() {
-      return (
-        <Container>
-          <InputContainer>
-            <Id
-              value={this.state.id}
-              onChangeText={id => this.setState({ id })}
-              placeholder="ID"
-              returnKeyType="next"
-              textContentType="username"
-              autoCapitalize="none"
-              autoCorrect={false}
-              onSubmitEditing={() => {
-                this.passwordInput.focus();
-              }}
-            />
-            <Pw
-              value={this.state.pw}
-              ref={ref => {
-                this.passwordInput = ref;
-              }}
-              onChangeText={pw => this.setState({ pw })}
-              placeholder="PW"
-              returnKeyType="done"
-              textContentType="password"
-              autoCapitalize="none"
-              autoCorrect={false}
-              onSubmitEditing={this.login.bind(this)}
-              secureTextEntry={true}
-            />
-            <LoginButton onPress={this.login.bind(this)}>
-              <LoginText color="white">
-                {!this.state.logging ? "로그인" : "..."}
-              </LoginText>
-            </LoginButton>
-          </InputContainer>
-          <HelpContainer>
-            <HelpButton>
-              <HelpText color="white">회원가입</HelpText>
-            </HelpButton>
-            <HelpButton>
-              <HelpText color="white">아이디 / 비밀번호 찾기</HelpText>
-            </HelpButton>
-          </HelpContainer>
-        </Container>
-      );
-    }
-  }
-);
+const Logo = styled.Image``;

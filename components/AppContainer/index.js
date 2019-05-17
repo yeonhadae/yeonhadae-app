@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
-import AppContainer from './presenter';
+import { withNavigation } from 'react-navigation';
+
+import Presenter from './presenter';
 
 const mapStateProps = (state, ownProps) => {
   const { user } = state;
@@ -9,4 +11,4 @@ const mapStateProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateProps)(AppContainer);
+export default connect(mapStateProps)(Presenter);

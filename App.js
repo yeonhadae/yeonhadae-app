@@ -7,7 +7,6 @@ import LoginCheckNavigator from './navigators/LoginCheckNavigator';
 import Icon from './components/Icon';
 import AppContainer from './components/AppContainer';
 const { persistor, store } = configureStore();
-//<LoginCheckNavigator />
 
 export default class App extends React.Component {
   state = {
@@ -34,7 +33,7 @@ export default class App extends React.Component {
       return (
         <Provider store={store}>
           <PersistGate persistor={persistor}>
-            <AppContainer />
+            <LoginCheckNavigator />
           </PersistGate>
         </Provider>
       );
