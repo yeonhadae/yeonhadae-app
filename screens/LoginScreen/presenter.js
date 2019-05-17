@@ -16,7 +16,6 @@ const getLogoSize = imagesUri => {
 
 const { width: deviceWidth } = device;
 const { originWidth, originHeight } = getLogoSize(images.logo);
-console.log(originHeight, originWidth);
 const logoWidth = deviceWidth - 50;
 const logoHeight = originHeight * (1 - logoWidth / originWidth);
 
@@ -35,7 +34,6 @@ export default class extends React.Component {
   }
 
   render() {
-    console.log(logoWidth, logoHeight);
     return (
       <Container>
         <Logo
