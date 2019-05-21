@@ -5,7 +5,6 @@ import { PersistGate } from 'redux-persist/es/integration/react';
 import configureStore from './redux/configureStore';
 import LoginCheckNavigator from './navigators/LoginCheckNavigator';
 import Icon from './components/Icon';
-import AppContainer from './components/AppContainer';
 const { persistor, store } = configureStore();
 
 export default class App extends React.Component {

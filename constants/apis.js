@@ -4,7 +4,8 @@ const API_URL = 'http://localhost:8000/';
 
 export const endPoints = {
   login: '/auth/token/',
-  signup: 'auth/signup/'
+  signup: '/auth/signup/',
+  checkToken: '/auth/checkToken/'
 };
 
 export const loginApi = axios.create({
