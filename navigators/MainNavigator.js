@@ -1,19 +1,20 @@
-import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
+import React from "react";
+import { createBottomTabNavigator, createAppContainer } from "react-navigation";
+import { SafeAreaView } from "react-native";
 
-import colors from '../constants/colors';
-import Meeting from '../screens/MeetingScreen';
-import Chat from '../screens/MeetingScreen';
-import Profile from '../screens/MeetingScreen';
-import Setting from '../screens/MeetingScreen';
-import { TabBarIcon } from '../components/Icon';
+import colors from "../constants/colors";
+import Meeting from "../screens/MeetingScreen";
+import Chat from "../screens/MeetingScreen";
+import Profile from "../screens/MeetingScreen";
+import Setting from "./SettingNavigator";
+import { TabBarIcon } from "../components/Icon";
 
 export default createBottomTabNavigator(
   {
     Meeting: {
       screen: Meeting,
       navigationOptions: {
-        title: '미팅',
+        title: "미팅",
         tabBarIcon: ({ focused }) => (
           <TabBarIcon
             name="meeting"
@@ -26,7 +27,7 @@ export default createBottomTabNavigator(
     Chat: {
       screen: Chat,
       navigationOptions: {
-        title: '채팅',
+        title: "채팅",
         tabBarIcon: ({ focused }) => (
           <TabBarIcon
             name="chat"
@@ -39,7 +40,7 @@ export default createBottomTabNavigator(
     Profile: {
       screen: Profile,
       navigationOptions: {
-        title: '프로필',
+        title: "프로필",
         tabBarIcon: ({ focused }) => (
           <TabBarIcon
             name="profile"
@@ -52,7 +53,7 @@ export default createBottomTabNavigator(
     Setting: {
       screen: Setting,
       navigationOptions: {
-        title: '설정',
+        title: "설정",
         tabBarIcon: ({ focused }) => (
           <TabBarIcon
             name="setting"
