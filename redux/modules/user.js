@@ -57,18 +57,22 @@ function login(username, password) {
         }
       )
       .then(response => {
-        console.log(response.data);
         const {
-          data: { access: token, user }
+          data: { access, account }
         } = response;
-        if (token) {
-          dispatch(setLogin(token));
-        }
-        if (user) {
-          dispatch(setUser(user));
+        console.log(access + ' ' + account);
+        if (response.data.access && response.data.account) {
+          dispatch(setUser(response.data.account));
+          dispatch(setLogin(response.data.access));
+          resolve(true);
+        } else {
+          reject('Token or Account is None');
         }
       })
-      .catch(e => console.error(e));
+      .then(result => {
+        return result;
+      })
+      .catch(e => false);
   };
 }
 
@@ -133,7 +137,8 @@ function applySetAccount(state, action) {
 // Export
 
 const actionCreators = {
-  login
+  login,
+  setLogout
 };
 
 export { actionCreators };

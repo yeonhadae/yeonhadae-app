@@ -25,7 +25,11 @@ export default class extends React.Component {
         this.setState({ isSubmitting: true });
         // submit
         // 폼을 보낼 수 있어야 한다
-        login(username, password);
+        const result = login(username, password);
+        if (!result) {
+          this.setState({ isSubmitting: false });
+          Alert.alert('계정 정보를 확인해주세요.');
+        }
       } else {
         Alert.alert('아이디와 패스워드를 모두 입력해주세요!');
       }

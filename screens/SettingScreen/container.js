@@ -1,9 +1,23 @@
-import React from "react";
+import React from 'react';
 
-import Presenter from "./presenter";
+import Presenter from './presenter';
 
-export default props => {
-  const { logout, getAccount } = props;
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  return <Presenter />;
-};
+  _logout() {
+    const {
+      navigation: { navigate },
+      logout
+    } = this.props;
+
+    logout();
+    navigate('LoginScreen');
+  }
+
+  render() {
+    return <Presenter logout={this._logout.bind(this)} />;
+  }
+}

@@ -1,32 +1,45 @@
-import React from "react";
-import styled from "styled-components";
-import { ScrollView } from "react-native";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { ScrollView } from 'react-native';
 
-import colors from "../../constants/colors";
-import app from "../../app.json";
-export default () => (
-  <ScrollView>
-    <SettingBox>
-      <SettingContent>앱 버전</SettingContent>
-      <SettingContent>{app["expo"]["version"]}</SettingContent>
-    </SettingBox>
-    <SettingBox>
-      <SettingContent>로그 아웃</SettingContent>
-    </SettingBox>
-    <SettingBox>
-      <SettingContent>알람 설정</SettingContent>
-    </SettingBox>
-    <SettingBox>
-      <SettingContent>신고하기</SettingContent>
-    </SettingBox>
-    <SettingBox>
-      <SettingContent>FAQ</SettingContent>
-    </SettingBox>
-    <SettingBox>
-      <SettingContent>이용 약관</SettingContent>
-    </SettingBox>
-  </ScrollView>
-);
+import colors from '../../constants/colors';
+import app from '../../app.json';
+export default class extends React.Component {
+  static propTypes = {
+    logout: PropTypes.func.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const { logout } = this.props;
+    return (
+      <ScrollView>
+        <SettingBox>
+          <SettingContent>앱 버전</SettingContent>
+          <SettingContent>{app['expo']['version']}</SettingContent>
+        </SettingBox>
+        <SettingBox onPressOut={logout}>
+          <SettingContent>로그 아웃</SettingContent>
+        </SettingBox>
+        <SettingBox>
+          <SettingContent>알람 설정</SettingContent>
+        </SettingBox>
+        <SettingBox>
+          <SettingContent>신고하기</SettingContent>
+        </SettingBox>
+        <SettingBox>
+          <SettingContent>FAQ</SettingContent>
+        </SettingBox>
+        <SettingBox>
+          <SettingContent>이용 약관</SettingContent>
+        </SettingBox>
+      </ScrollView>
+    );
+  }
+}
 
 const SettingBox = styled.TouchableOpacity`
   padding-horizontal: 20px;

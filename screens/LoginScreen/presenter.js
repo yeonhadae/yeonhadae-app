@@ -76,7 +76,7 @@ export default class extends React.Component {
           </InputBox>
           <LoginButton onPressOut={this.props.submit}>
             {!this.props.isSubmitting ? (
-              <LoginText color="white">'로그인'</LoginText>
+              <LoginText color="white">로그인</LoginText>
             ) : (
               <ActivityIndicator size="small" color="white" />
             )}

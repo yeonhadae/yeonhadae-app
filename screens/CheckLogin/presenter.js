@@ -23,10 +23,12 @@ export default class extends React.PureComponent {
       token,
       navigation: { navigate }
     } = this.props;
+
     if (!isLoggedIn) {
       navigate('LoginScreen');
+    } else {
+      navigate('MainNavigator');
     }
-    navigate('MainNavigator');
     // 임시 모션
   }
 

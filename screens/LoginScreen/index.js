@@ -10,7 +10,16 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
+const mapStateToProps = (state, ownProps) => {
+  const { user } = state;
+  return {
+    isLoggedIn: user.isLoggedIn,
+    token: user.token,
+    profile: user.profile
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Container);
