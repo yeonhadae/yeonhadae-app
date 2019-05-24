@@ -1,13 +1,13 @@
 // imports
 
-import { loginApi, endPoints } from '../../constants/apis';
-import { AsyncStorage } from 'react-native';
+import { loginApi, endPoints } from "../../constants/apis";
+import { AsyncStorage } from "react-native";
 // Actions
 
-const LOGIN = 'LOGIN';
-const LOGOUT = 'LOGOUT';
-const SET_USER = 'SET_USER';
-const SET_ACCOUNT = 'SET_ACCOUNT';
+const LOGIN = "LOGIN";
+const LOGOUT = "LOGOUT";
+const SET_USER = "SET_USER";
+const SET_ACCOUNT = "SET_ACCOUNT";
 
 // Action Creators
 
@@ -42,38 +42,28 @@ function setAccount(username, password) {
 // API Actions
 
 function login(username, password) {
-  return dispatch => {
+  return dispatch =>
     loginApi
       .post(
         endPoints.login,
-        {
-          username,
-          password
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
+        { username, password },
+        { headers: { "Content-Type": "application/json" } }
       )
       .then(response => {
-        const {
-          data: { access, account }
-        } = response;
-        console.log(access + ' ' + account);
-        if (response.data.access && response.data.account) {
-          dispatch(setUser(response.data.account));
-          dispatch(setLogin(response.data.access));
-          resolve(true);
+        const { access, account } = response.data;
+        if (access && account) {
+          dispatch(setUser(account));
+          dispatch(setLogin(access));
+          return true;
         } else {
-          reject('Token or Account is None');
+          console.log("access 또는 account가 제공되지 않았음");
+          return false;
         }
       })
-      .then(result => {
-        return result;
-      })
-      .catch(e => false);
-  };
+      .catch(e => {
+        console.log(e);
+        return false;
+      });
 }
 
 // Initial State
@@ -101,11 +91,11 @@ function reducer(state = initialState, action) {
 
 // Reducer Functions
 function applyLogin(state, action) {
-  const { token } = action;
+  const { access } = action;
   return {
     ...state,
     isLoggedIn: true,
-    token
+    access
   };
 }
 
@@ -114,15 +104,15 @@ function applyLogout(state) {
   return {
     ...state,
     isLoggedIn: false,
-    token: ''
+    token: ""
   };
 }
 
 function applySetUser(state, action) {
-  const { user } = action;
+  const { account } = action;
   return {
     ...state,
-    profile: user
+    profile: account
   };
 }
 

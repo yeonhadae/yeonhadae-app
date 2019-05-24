@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Loading from '../../components/Loading';
+import React from "react";
+import PropTypes from "prop-types";
+import Loading from "../../components/Loading";
 
-export default class extends React.PureComponent {
+export default class extends React.Component {
   static propTypes = {
     isLoggedIn: PropTypes.bool.isRequired
   };
@@ -17,17 +17,14 @@ export default class extends React.PureComponent {
    */
   componentWillMount() {
     const {
-      username,
-      password,
       isLoggedIn,
-      token,
       navigation: { navigate }
     } = this.props;
 
     if (!isLoggedIn) {
-      navigate('LoginScreen');
+      navigate("LoginScreen");
     } else {
-      navigate('MainNavigator');
+      navigate("MainNavigator");
     }
     // 임시 모션
   }

@@ -1,10 +1,11 @@
-import React from 'react';
-import { AppLoading, Asset } from 'expo';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/es/integration/react';
-import configureStore from './redux/configureStore';
-import LoginCheckNavigator from './navigators/LoginCheckNavigator';
-import Icon from './components/Icon';
+import React from "react";
+import { AppLoading, Asset } from "expo";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/es/integration/react";
+import configureStore from "./redux/configureStore";
+import AppContainer from "./components/AppContainer";
+
+import Icon from "./components/Icon";
 const { persistor, store } = configureStore();
 
 export default class App extends React.Component {
@@ -15,7 +16,7 @@ export default class App extends React.Component {
   handleError = e => console.error(e);
   handleLoaded = () => this.setState({ loading: false });
   loadAssets = async () => {
-    await Asset.loadAsync(...Object.values(Icon));
+    await Asset.loadAsync(Object.values(Icon));
   };
 
   render() {
@@ -32,7 +33,7 @@ export default class App extends React.Component {
       return (
         <Provider store={store}>
           <PersistGate persistor={persistor}>
-            <LoginCheckNavigator />
+            <AppContainer />
           </PersistGate>
         </Provider>
       );
