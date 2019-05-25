@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://2849a17c.ngrok.io';
+const API_URL = "http://698453d1.ngrok.io";
 
 export const endPoints = {
-  login: '/accounts/login/',
-  signup: '/accounts/signup/',
-  checkToken: '/accounts/checkToken/'
+  login: "/accounts/login/",
+  signup: "/accounts/signup/",
+  checkToken: "/accounts/checkToken/"
 };
 
 export const loginApi = axios.create({
