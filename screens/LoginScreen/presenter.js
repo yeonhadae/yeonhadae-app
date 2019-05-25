@@ -16,8 +16,8 @@ const getLogoSize = imagesUri => {
 
 const { width: deviceWidth } = device;
 const { originWidth, originHeight } = getLogoSize(images.logo);
-const logoWidth = deviceWidth - 50;
-const logoHeight = originHeight * (1 - logoWidth / originWidth);
+const logoWidth = deviceWidth - 100;
+const logoHeight = originHeight * (logoWidth / originWidth);
 
 export default class extends React.Component {
   static propTypes = {
@@ -36,11 +36,13 @@ export default class extends React.Component {
   render() {
     return (
       <Container>
-        <Logo
-          source={images.logo}
-          resizeMode={'contain'}
-          style={{ width: logoWidth, height: logoHeight }}
-        />
+        <LogoContainer>
+          <Logo
+            source={images.logo}
+            resizeMode={'contain'}
+            style={{ width: logoWidth, height: logoHeight }}
+          />
+        </LogoContainer>
         <InputContainer>
           <InputBox>
             <LoginInputIcon color={colors.TINT_COLOR} name="username" />
@@ -74,6 +76,8 @@ export default class extends React.Component {
               secureTextEntry={true}
             />
           </InputBox>
+        </InputContainer>
+        <HelpContainer>
           <LoginButton onPressOut={this.props.submit}>
             {!this.props.isSubmitting ? (
               <LoginText color="white">로그인</LoginText>
@@ -81,8 +85,6 @@ export default class extends React.Component {
               <ActivityIndicator size="small" color="white" />
             )}
           </LoginButton>
-        </InputContainer>
-        <HelpContainer>
           <HelpButton>
             <HelpText color="white">회원가입</HelpText>
           </HelpButton>
@@ -99,7 +101,6 @@ const BtnInterface = styled.TouchableOpacity`
   width: 100%;
   height: 45px;
   padding: 5px;
-  margin-vertical: 20px;
   background-color: ${props => props.bgColor || colors.TINT_COLOR};
   justify-content: center;
   align-items: center;
@@ -138,12 +139,23 @@ const HelpButton = styled(BtnInterface)``;
 const LoginText = styled(TxtInterface)``;
 const HelpText = styled(TxtInterface)``;
 
-const InputContainer = styled(ComponentContainer)``;
-const HelpContainer = styled(ComponentContainer)``;
+const InputContainer = styled(ComponentContainer)`
+  flex: 0.3;
+  justify-content: center;
+`;
+const HelpContainer = styled(ComponentContainer)`
+  flex: 0.3;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+const LogoContainer = styled(ComponentContainer)`
+  flex: 0.3;
+  justify-content: center;
+`;
 
 const Container = styled.View`
   flex: 1;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 
   background-color: ${colors.MAIN_COLOR};
