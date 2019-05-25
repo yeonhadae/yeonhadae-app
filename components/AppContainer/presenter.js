@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import styled from "styled-components";
-import LoginScreen from "../../screens/LoginScreen";
-import MainNavigator from "../../navigators/MainNavigator";
+import styled from 'styled-components';
+import AccountNavigator from '../../navigators/AccountNavigator';
+import MainNavigator from '../../navigators/MainNavigator';
 
 export default class extends Component {
   static propTypes = {
@@ -28,7 +28,7 @@ export default class extends Component {
             </>
           )
         ) : (
-          <LoginScreen />
+          <AccountNavigator />
         )}
       </Container>
     );

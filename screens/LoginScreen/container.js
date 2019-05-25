@@ -1,11 +1,11 @@
-import React from "react";
-import Presenter from "./presenter";
-import { Alert } from "react-native";
+import React from 'react';
+import Presenter from './presenter';
+import { Alert } from 'react-native';
 
 export default class extends React.Component {
   state = {
-    username: "",
-    password: "",
+    username: '',
+    password: '',
     isSubmitting: false
   };
 
@@ -30,23 +30,32 @@ export default class extends React.Component {
           const result = await login(username, password);
           if (!result) {
             this.setState({ isSubmitting: false });
-            Alert.alert("계정 정보를 확인해주세요.");
+            Alert.alert('계정 정보를 확인해주세요.');
           }
         } else {
-          Alert.alert("아이디와 패스워드를 모두 입력해주세요!");
+          Alert.alert('아이디와 패스워드를 모두 입력해주세요!');
         }
       }
     } catch (e) {
       console.log(e);
-      Alert.alert("로그인 실패");
+      Alert.alert('로그인 실패');
       isSubmitting = false;
     }
   };
 
+  _signupNavigator() {
+    const {
+      navigation: { navigate }
+    } = this.props;
+    navigate('TermsOfServiceScreen');
+  }
+
   render() {
+    console.log(this.props);
     return (
       <Presenter
         {...this.state}
+        toSignup={this._signupNavigator.bind(this)}
         changeUsername={this._changeUsername.bind(this)}
         changePassword={this._changePassword.bind(this)}
         submit={this._submit.bind(this)}

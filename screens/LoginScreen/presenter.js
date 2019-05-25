@@ -26,7 +26,8 @@ export default class extends React.Component {
     password: PropTypes.string.isRequired,
     changePassword: PropTypes.func.isRequired,
     changeUsername: PropTypes.func.isRequired,
-    submit: PropTypes.func.isRequired
+    submit: PropTypes.func.isRequired,
+    toSignup: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -85,7 +86,7 @@ export default class extends React.Component {
               <ActivityIndicator size="small" color="white" />
             )}
           </LoginButton>
-          <HelpButton>
+          <HelpButton onPressOut={this.props.toSignup}>
             <HelpText color="white">회원가입</HelpText>
           </HelpButton>
           <HelpButton>
