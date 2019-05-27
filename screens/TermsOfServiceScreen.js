@@ -5,10 +5,6 @@ import styled from 'styled-components';
 import colors from '../constants/colors';
 
 export default class extends React.Component {
-  static navigationOptions = {
-    title: '이용약관'
-  };
-
   constructor(props) {
     super(props);
   }
@@ -17,7 +13,7 @@ export default class extends React.Component {
       navigation: { navigate }
     } = this.props;
 
-    navigate('SignupScreen');
+    navigate('SignupFormScreen');
   }
 
   render() {

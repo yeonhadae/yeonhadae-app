@@ -47,7 +47,7 @@ export default class extends React.Component {
     const {
       navigation: { navigate }
     } = this.props;
-    navigate('TermsOfServiceScreen');
+    navigate('SignupNavigator');
   }
 
   render() {
