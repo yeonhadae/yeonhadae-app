@@ -1,12 +1,12 @@
 // imports
 
-import { loginApi, endPoints } from "../../constants/apis";
-import { AsyncStorage } from "react-native";
+import { loginApi, endPoints } from '../../constants/apis';
+import { AsyncStorage } from 'react-native';
 // Actions
 
-const LOGIN = "LOGIN";
-const LOGOUT = "LOGOUT";
-const SET_USER = "SET_USER";
+const LOGIN = 'LOGIN';
+const LOGOUT = 'LOGOUT';
+const SET_USER = 'SET_USER';
 
 // Action Creators
 
@@ -36,14 +36,9 @@ function signup(form) {
       .post(
         endPoints.signup,
         { ...form },
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { 'Content-Type': 'application/json' } }
       )
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+      .then(response => response.data);
 }
 
 function login(username, password) {
@@ -52,7 +47,7 @@ function login(username, password) {
       .post(
         endPoints.login,
         { username, password },
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { 'Content-Type': 'application/json' } }
       )
       .then(response => {
         const { access: token, account } = response.data;
@@ -62,7 +57,7 @@ function login(username, password) {
           dispatch(setLogin(token));
           return true;
         } else {
-          console.log("access 또는 account가 제공되지 않았음");
+          console.log('access 또는 account가 제공되지 않았음');
           return false;
         }
       })
@@ -108,7 +103,7 @@ function applyLogout(state) {
   return {
     ...state,
     isLoggedIn: false,
-    token: ""
+    token: ''
   };
 }
 

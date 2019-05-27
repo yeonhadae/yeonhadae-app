@@ -4,9 +4,7 @@ import Container from './container';
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    signup: form => {
-      dispatch(userActions.signup(form));
-    }
+    signup: form => dispatch(userActions.signup(form))
   };
 };
 

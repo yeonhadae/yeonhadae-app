@@ -8,11 +8,13 @@ const TEXT_COLOR = '#415A79';
 const POPUP_COLOR = '#A5C9EB';
 
 const UNSELECTED_ICON = '#dfdfdf';
+const ERROR_TEXT = '#cc0000';
 
 export default {
   UNSELECTED_ICON,
   MAIN_COLOR,
   TINT_COLOR,
   TEXT_COLOR,
-  POPUP_COLOR
+  POPUP_COLOR,
+  ERROR_TEXT
 };
