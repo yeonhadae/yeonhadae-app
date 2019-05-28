@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import AccountNavigator from '../../navigators/AccountNavigator';
 import MainNavigator from '../../navigators/MainNavigator';
+import ProfileCreateScreen from '../../screens/ProfileCreateScreen';
 
 export default class extends Component {
   static propTypes = {
@@ -18,13 +19,13 @@ export default class extends Component {
         {isLoggedIn ? (
           profile ? (
             <>
-              <SafeView />
+              <SafeView style="flex:0" />
               <MainNavigator screenProps={{ profile }} />
             </>
           ) : (
             <>
-              <SafeView />
-              <MainNavigator />
+              <SafeView style={{ flex: 0, backgroundColor: '#3AC2D2' }} />
+              <ProfileCreateScreen />
             </>
           )
         ) : (

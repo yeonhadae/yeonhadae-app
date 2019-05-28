@@ -9,6 +9,10 @@ import chat from '../assets/chat.png';
 import username from '../assets/username.png';
 import password from '../assets/password.png';
 import logo from '../assets/yeonhadae.png';
+import signupEmail from '../assets/signup_email.png';
+import signupPasswordCheck from '../assets/signup_password_check.png';
+import signupPassword from '../assets/signup_password.png';
+import signup_profile from '../assets/signup_profile.png';
 
 imageFile = {
   logo,
@@ -17,7 +21,11 @@ imageFile = {
   chat,
   setting,
   username,
-  password
+  password,
+  signupEmail,
+  signupPassword,
+  signupPasswordCheck,
+  signup_profile
 };
 
 export const TabBarIcon = ({ name, size, color }) => (

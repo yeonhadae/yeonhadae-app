@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = 'http://e1bc1abe.ngrok.io';
 
 export const endPoints = {
   login: '/accounts/login/',
