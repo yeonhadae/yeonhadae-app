@@ -41,7 +41,8 @@ export default class extends React.Component {
         height,
         weight,
         religion,
-        is_smoker
+        is_smoker,
+        avatar: { base64: avatar }
       } = this.state);
       console.log(form);
 

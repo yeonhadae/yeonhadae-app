@@ -1,12 +1,13 @@
 // imports
 
-import { loginApi, endPoints } from '../../constants/apis';
+import api, { loginApi, endPoints } from '../../constants/apis';
 import { AsyncStorage } from 'react-native';
 // Actions
 
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 const SET_USER = 'SET_USER';
+const SET_PROFILE = 'SET_PROFILE';
 
 // Action Creators
 
@@ -21,10 +22,17 @@ function setLogout() {
   return { type: LOGOUT };
 }
 
-function setUser(user) {
+function setUser(account) {
   return {
     type: SET_USER,
-    user
+    account
+  };
+}
+
+function setProfile(profile) {
+  return {
+    type: SET_PROFILE,
+    profile
   };
 }
 
@@ -33,22 +41,30 @@ function setUser(user) {
 function signup(form) {
   return dispatch =>
     loginApi
-      .post(
-        endPoints.signup,
-        { ...form },
-        { headers: { 'Content-Type': 'application/json' } }
-      )
+      .post(endPoints.signup, { ...form })
       .then(response => response.data);
+}
+
+function createProfile(form) {
+  return (dispatch, getState) => {
+    const {
+      user: {
+        token,
+        account: { id }
+      }
+    } = getState();
+    api(token)
+      .post(endPoints.createProfile(id), { ...form })
+      .then(response => {
+        dispatch(setProfile(response.data));
+      });
+  };
 }
 
 function login(username, password) {
   return dispatch =>
     loginApi
-      .post(
-        endPoints.login,
-        { username, password },
-        { headers: { 'Content-Type': 'application/json' } }
-      )
+      .post(endPoints.login, { username, password })
       .then(response => {
         const { access: token, account } = response.data;
         if (token && account) {
@@ -83,6 +99,8 @@ function reducer(state = initialState, action) {
       return applyLogout();
     case SET_USER:
       return applySetUser(state, action);
+    case SET_PROFILE:
+      return applySetProfile(state, action);
     default:
       return state;
   }
@@ -100,10 +118,11 @@ function applyLogin(state, action) {
 
 function applyLogout(state) {
   AsyncStorage.clear();
+  console.log(state);
   return {
     ...state,
     isLoggedIn: false,
-    token: ''
+    access: ''
   };
 }
 
@@ -111,7 +130,15 @@ function applySetUser(state, action) {
   const { account } = action;
   return {
     ...state,
-    profile: account
+    account
+  };
+}
+
+function applySetProfile(state, action) {
+  const { profile } = action;
+  return {
+    ...state,
+    profile
   };
 }
 
@@ -120,7 +147,8 @@ function applySetUser(state, action) {
 const actionCreators = {
   login,
   setLogout,
-  signup
+  signup,
+  createProfile
 };
 
 export { actionCreators };
