@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import RNPickerSelect from 'react-native-picker-select';
+import { StyleSheet } from 'react-native';
 
 import colors from '../../constants/colors';
 import Icon from '../../components/Icon';
 import device from '../../constants/device';
+import { SEOUL } from '../../constants/locations';
+import { IN_SEOUL } from '../../constants/universities';
 
 export default class extends React.Component {
   static propTypes = {
@@ -12,8 +16,9 @@ export default class extends React.Component {
     name: PropTypes.string.isRequired,
     gender: PropTypes.string.isRequired,
     univ: PropTypes.string.isRequired,
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired,
+    location: PropTypes.string,
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
     avatar: PropTypes.object.isRequired,
     errors: PropTypes.object,
     //religion: PropTypes,
@@ -31,11 +36,11 @@ export default class extends React.Component {
       gender,
       univ,
       name,
+      location,
       latitude,
       longitude,
       errors
     } = this.props;
-    console.log(avatar);
     return (
       <Screen>
         <FormContainer>
@@ -58,22 +63,65 @@ export default class extends React.Component {
                   errors.name.map(e => <ErrorText>{e}</ErrorText>)}
               </ErrorBox>
             </NameField>
+            <LocationField>
+              <InputBox>
+                <RNPickerSelect
+                  value={location}
+                  style={style}
+                  placeholder={{ label: '원하는 미팅 장소', value: null }}
+                  onValueChange={this.props.onValueChange('location')}
+                  items={SEOUL}
+                />
+              </InputBox>
+              <ErrorBox>
+                {errors.location &&
+                  errors.location.map((e, index) => (
+                    <ErrorText key={index}>{e}</ErrorText>
+                  ))}
+              </ErrorBox>
+            </LocationField>
             <UnivField>
               <InputBox>
-                <InputText />
+                <RNPickerSelect
+                  value={univ}
+                  style={style}
+                  placeholder={{
+                    label: '대학을 선택해주세요.',
+                    value: null
+                  }}
+                  onValueChange={this.props.onValueChange('univ')}
+                  items={IN_SEOUL}
+                />
               </InputBox>
               <ErrorBox>
                 {errors.univ &&
-                  errors.univ.map(e => <ErrorText>{e}</ErrorText>)}
+                  errors.univ.map((e, index) => (
+                    <ErrorText key={index}>{e}</ErrorText>
+                  ))}
               </ErrorBox>
             </UnivField>
             <GenderField>
               <InputBox>
-                <InputText />
+                <RNPickerSelect
+                  value={gender}
+                  placeholder={{
+                    label: '성별을 선택해주세요.',
+                    value: null,
+                    color: 'black'
+                  }}
+                  style={style}
+                  onValueChange={this.props.onValueChange('gender')}
+                  items={[
+                    { label: '남자', value: 'M' },
+                    { label: '여자', value: 'F' }
+                  ]}
+                />
               </InputBox>
               <ErrorBox>
                 {errors.gender &&
-                  errors.gender.map(e => <ErrorText>{e}</ErrorText>)}
+                  errors.gender.map((e, index) => (
+                    <ErrorText key={index}>{e}</ErrorText>
+                  ))}
               </ErrorBox>
             </GenderField>
           </Container>
@@ -82,6 +130,15 @@ export default class extends React.Component {
     );
   }
 }
+
+const style = StyleSheet.create({
+  InputIOS: {
+    color: colors.TEXT_COLOR
+  },
+  InputAndroid: {
+    color: colors.TEXT_COLOR
+  }
+});
 
 const Screen = styled.View`
   background-color: ${colors.MAIN_COLOR};
@@ -93,6 +150,7 @@ const Screen = styled.View`
 
 const Container = styled.View`
   width: 100%;
+  flex: 1;
   justify-content: space-around;
 `;
 

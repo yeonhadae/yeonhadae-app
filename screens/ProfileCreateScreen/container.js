@@ -12,6 +12,7 @@ export default class extends React.Component {
       name: '',
       gender: '',
       univ: '',
+      location: '',
       latitude: 0,
       longitude: 0,
       avatar: {},
@@ -32,10 +33,12 @@ export default class extends React.Component {
     const { isSubmitting } = this.state;
     if (!isSubmitting) {
       this.setState({ isSubmitting: true });
-      const form = ({
+
+      const {
         name,
         gender,
         univ,
+        location,
         latitude,
         longitude,
         height,
@@ -43,7 +46,22 @@ export default class extends React.Component {
         religion,
         is_smoker,
         avatar: { base64: avatar }
-      } = this.state);
+      } = this.state;
+
+      const form = {
+        name,
+        gender,
+        univ,
+        location,
+        latitude,
+        longitude,
+        height,
+        weight,
+        religion,
+        is_smoker,
+        avatar
+      };
+
       console.log(form);
 
       const { createProfile } = this.props;
