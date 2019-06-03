@@ -1,4 +1,5 @@
 export const SEOUL = [
+  { label: '상관 없음', value: 'all' },
   { label: '종로구', value: 'jongno' },
   { label: '중구', value: 'joong' },
   { label: '용산구', value: 'yongsan' },

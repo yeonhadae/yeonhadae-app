@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const API_URL = 'http://e1bc1abe.ngrok.io';
+const API_URL = 'http://48149f69.ngrok.io';
 
 export const endPoints = {
   login: '/accounts/login/',
   signup: '/accounts/signup/',
-  checkToken: '/accounts/checkToken/',
+  validateToken: id => `/users/${id}/api/validate-token/`,
   createProfile: id => `/users/${id}/`,
   sendMailToken: id => `/users/${id}/token/`,
   emailVerification: id => `/users/${id}/verification/`

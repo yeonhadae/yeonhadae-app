@@ -13,10 +13,10 @@ export default class extends Component {
   };
 
   render() {
-    const { isLoggedIn, profile } = this.props;
+    const { isLoggedIn, profile, account } = this.props;
     return (
       <Container>
-        {isLoggedIn ? (
+        {isLoggedIn && account ? (
           profile ? (
             <>
               <SafeView style="flex:0" />

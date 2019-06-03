@@ -19,7 +19,10 @@ export default class extends React.Component {
 
   _submit = async () => {
     const { username, password, isSubmitting } = this.state;
-    const { login } = this.props;
+    const {
+      login,
+      navigation: { navigate }
+    } = this.props;
 
     try {
       if (!isSubmitting) {
@@ -28,9 +31,12 @@ export default class extends React.Component {
           // submit
           // 폼을 보낼 수 있어야 한다
           const result = await login(username, password);
+
           if (!result) {
             this.setState({ isSubmitting: false });
             Alert.alert('계정 정보를 확인해주세요.');
+          } else {
+            navigate('CheckProfile');
           }
         } else {
           Alert.alert('아이디와 패스워드를 모두 입력해주세요!');

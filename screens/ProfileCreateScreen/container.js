@@ -34,7 +34,7 @@ export default class extends React.Component {
     if (!isSubmitting) {
       this.setState({ isSubmitting: true });
 
-      const {
+      const form = ({
         name,
         gender,
         univ,
@@ -46,27 +46,16 @@ export default class extends React.Component {
         religion,
         is_smoker,
         avatar: { base64: avatar }
-      } = this.state;
-
-      const form = {
-        name,
-        gender,
-        univ,
-        location,
-        latitude,
-        longitude,
-        height,
-        weight,
-        religion,
-        is_smoker,
-        avatar
-      };
-
-      console.log(form);
+      } = this.state);
 
       const { createProfile } = this.props;
 
-      //await createProfile(form);
+      try {
+        const result = await createProfile(form);
+      } catch (e) {
+        console.log(e.response.data);
+        console.log(e.response.status);
+      }
     }
   }
 

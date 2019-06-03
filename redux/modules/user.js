@@ -38,6 +38,20 @@ function setProfile(profile) {
 
 // API Actions
 
+function validateToken(id, username, token) {
+  return dispatch =>
+    api(token)
+      .post(endPoints.validateToken(id), { username })
+      .then(response => {
+        console.log(response.data);
+        return true;
+      })
+      .catch(e => {
+        console.log('에러임');
+        return false;
+      });
+}
+
 function signup(form) {
   return dispatch =>
     loginApi
@@ -47,13 +61,14 @@ function signup(form) {
 
 function createProfile(form) {
   return (dispatch, getState) => {
+    console.log(getState());
     const {
       user: {
         token,
         account: { id }
       }
     } = getState();
-    api(token)
+    return api(token)
       .post(endPoints.createProfile(id), { ...form })
       .then(response => {
         dispatch(setProfile(response.data));
@@ -62,7 +77,7 @@ function createProfile(form) {
 }
 
 function login(username, password) {
-  return dispatch =>
+  return (dispatch, getState) =>
     loginApi
       .post(endPoints.login, { username, password })
       .then(response => {
@@ -71,6 +86,7 @@ function login(username, password) {
           account.password = password;
           dispatch(setUser(account));
           dispatch(setLogin(token));
+          console.log(getState());
           return true;
         } else {
           console.log('access 또는 account가 제공되지 않았음');
@@ -108,21 +124,19 @@ function reducer(state = initialState, action) {
 
 // Reducer Functions
 function applyLogin(state, action) {
-  const { access } = action;
+  const { token } = action;
   return {
     ...state,
     isLoggedIn: true,
-    access
+    token
   };
 }
 
-function applyLogout(state) {
-  AsyncStorage.clear();
-  console.log(state);
+function applyLogout() {
+  AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
+  //  AsyncStorage.clear();
   return {
-    ...state,
-    isLoggedIn: false,
-    access: ''
+    isLoggedIn: false
   };
 }
 
@@ -148,7 +162,8 @@ const actionCreators = {
   login,
   setLogout,
   signup,
-  createProfile
+  createProfile,
+  validateToken
 };
 
 export { actionCreators };

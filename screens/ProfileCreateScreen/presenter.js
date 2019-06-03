@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import RNPickerSelect from 'react-native-picker-select';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ActivityIndicator } from 'react-native';
 
 import colors from '../../constants/colors';
 import Icon from '../../components/Icon';
@@ -13,9 +13,9 @@ import { IN_SEOUL } from '../../constants/universities';
 export default class extends React.Component {
   static propTypes = {
     isSubmitting: PropTypes.bool.isRequired,
-    name: PropTypes.string.isRequired,
-    gender: PropTypes.string.isRequired,
-    univ: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    gender: PropTypes.string,
+    univ: PropTypes.string,
     location: PropTypes.string,
     latitude: PropTypes.number,
     longitude: PropTypes.number,
@@ -39,7 +39,8 @@ export default class extends React.Component {
       location,
       latitude,
       longitude,
-      errors
+      errors,
+      isSubmitting
     } = this.props;
     return (
       <Screen>
@@ -56,7 +57,14 @@ export default class extends React.Component {
             </AvatarField>
             <NameField>
               <InputBox>
-                <InputText />
+                <InputText
+                  value={name}
+                  onChangeText={this.props.onValueChange('name')}
+                  placeholder="이름"
+                  returnKeyType="next"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                />
               </InputBox>
               <ErrorBox>
                 {errors.name &&
@@ -64,15 +72,18 @@ export default class extends React.Component {
               </ErrorBox>
             </NameField>
             <LocationField>
-              <InputBox>
+              <PickerBox>
                 <RNPickerSelect
                   value={location}
-                  style={style}
+                  style={{
+                    ...style,
+                    placeholder: { color: colors.TEXT_COLOR }
+                  }}
                   placeholder={{ label: '원하는 미팅 장소', value: null }}
                   onValueChange={this.props.onValueChange('location')}
                   items={SEOUL}
                 />
-              </InputBox>
+              </PickerBox>
               <ErrorBox>
                 {errors.location &&
                   errors.location.map((e, index) => (
@@ -81,10 +92,13 @@ export default class extends React.Component {
               </ErrorBox>
             </LocationField>
             <UnivField>
-              <InputBox>
+              <PickerBox>
                 <RNPickerSelect
                   value={univ}
-                  style={style}
+                  style={{
+                    ...style,
+                    placeholder: { color: colors.TEXT_COLOR }
+                  }}
                   placeholder={{
                     label: '대학을 선택해주세요.',
                     value: null
@@ -92,7 +106,7 @@ export default class extends React.Component {
                   onValueChange={this.props.onValueChange('univ')}
                   items={IN_SEOUL}
                 />
-              </InputBox>
+              </PickerBox>
               <ErrorBox>
                 {errors.univ &&
                   errors.univ.map((e, index) => (
@@ -101,7 +115,7 @@ export default class extends React.Component {
               </ErrorBox>
             </UnivField>
             <GenderField>
-              <InputBox>
+              <PickerBox>
                 <RNPickerSelect
                   value={gender}
                   placeholder={{
@@ -109,14 +123,17 @@ export default class extends React.Component {
                     value: null,
                     color: 'black'
                   }}
-                  style={style}
+                  style={{
+                    ...style,
+                    placeholder: { color: colors.TEXT_COLOR }
+                  }}
                   onValueChange={this.props.onValueChange('gender')}
                   items={[
                     { label: '남자', value: 'M' },
                     { label: '여자', value: 'F' }
                   ]}
                 />
-              </InputBox>
+              </PickerBox>
               <ErrorBox>
                 {errors.gender &&
                   errors.gender.map((e, index) => (
@@ -126,17 +143,40 @@ export default class extends React.Component {
             </GenderField>
           </Container>
         </FormContainer>
+        <ButtonContainer>
+          <SubmitButton onPressOut={this.props.submit}>
+            {isSubmitting ? (
+              <ActivityIndicator />
+            ) : (
+              <SubmitText>프로필 만들기</SubmitText>
+            )}
+          </SubmitButton>
+        </ButtonContainer>
       </Screen>
     );
   }
 }
 
 const style = StyleSheet.create({
-  InputIOS: {
-    color: colors.TEXT_COLOR
+  inputIOS: {
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: colors.TINT_COLOR,
+    borderRadius: 4,
+    color: colors.TEXT_COLOR,
+    paddingRight: 30 // to ensure the text is never behind the icon
   },
-  InputAndroid: {
-    color: colors.TEXT_COLOR
+  inputAndroid: {
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderWidth: 0.5,
+    borderColor: 'gray',
+    borderRadius: 8,
+    color: 'black',
+    paddingRight: 30 // to ensure the text is never behind the icon
   }
 });
 
@@ -154,6 +194,26 @@ const Container = styled.View`
   justify-content: space-around;
 `;
 
+const ButtonContainer = styled.View`
+  width: 85%;
+  flex: 0.1;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+`;
+
+const SubmitButton = styled.TouchableOpacity`
+  width: 50%;
+  height: 50%;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+  background-color: ${colors.TINT_COLOR};
+`;
+const SubmitText = styled.Text`
+  color: white;
+`;
 const FormContainer = styled.ScrollView`
   width: 85%;
   flex: 1;
@@ -177,6 +237,12 @@ const InputBox = styled.View`
   height: ${device.height * 0.1};
   border-bottom-width: 1px;
   border-color: ${colors.TINT_COLOR};
+  justify-content: flex-end;
+`;
+
+const PickerBox = styled.View`
+  width: 100%;
+  height: ${device.height * 0.1};
   justify-content: flex-end;
 `;
 

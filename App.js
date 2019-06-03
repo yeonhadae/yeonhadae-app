@@ -1,11 +1,11 @@
-import React from "react";
-import { AppLoading, Asset } from "expo";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/es/integration/react";
-import configureStore from "./redux/configureStore";
-import AppContainer from "./components/AppContainer";
+import React from 'react';
+import { AppLoading, Asset } from 'expo';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/es/integration/react';
+import configureStore from './redux/configureStore';
+import AppContainer from './navigators/AppContainerNavigator';
 
-import Icon from "./components/Icon";
+import Icon from './components/Icon';
 const { persistor, store } = configureStore();
 
 export default class App extends React.Component {
