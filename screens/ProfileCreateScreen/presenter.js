@@ -7,6 +7,7 @@ import { StyleSheet, ActivityIndicator } from 'react-native';
 import colors from '../../constants/colors';
 import Icon from '../../components/Icon';
 import device from '../../constants/device';
+import SafeZone from '../../components/MainTopSafeArea';
 import { SEOUL } from '../../constants/locations';
 import { IN_SEOUL } from '../../constants/universities';
 
@@ -43,116 +44,127 @@ export default class extends React.Component {
       isSubmitting
     } = this.props;
     return (
-      <Screen>
-        <FormContainer>
-          <Container>
-            <AvatarField>
-              <AddAvatarImage onPressOut={this.props.uploadAvatar}>
-                {avatar.uri ? (
-                  <Avatar source={{ uri: avatar.uri }} />
-                ) : (
-                  <Avatar source={Icon.profile} />
-                )}
-              </AddAvatarImage>
-            </AvatarField>
-            <NameField>
-              <InputBox>
-                <InputText
-                  value={name}
-                  onChangeText={this.props.onValueChange('name')}
-                  placeholder="이름"
-                  returnKeyType="next"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                />
-              </InputBox>
-              <ErrorBox>
-                {errors.name &&
-                  errors.name.map(e => <ErrorText>{e}</ErrorText>)}
-              </ErrorBox>
-            </NameField>
-            <LocationField>
-              <PickerBox>
-                <RNPickerSelect
-                  value={location}
-                  style={{
-                    ...style,
-                    placeholder: { color: colors.TEXT_COLOR }
-                  }}
-                  placeholder={{ label: '원하는 미팅 장소', value: null }}
-                  onValueChange={this.props.onValueChange('location')}
-                  items={SEOUL}
-                />
-              </PickerBox>
-              <ErrorBox>
-                {errors.location &&
-                  errors.location.map((e, index) => (
-                    <ErrorText key={index}>{e}</ErrorText>
-                  ))}
-              </ErrorBox>
-            </LocationField>
-            <UnivField>
-              <PickerBox>
-                <RNPickerSelect
-                  value={univ}
-                  style={{
-                    ...style,
-                    placeholder: { color: colors.TEXT_COLOR }
-                  }}
-                  placeholder={{
-                    label: '대학을 선택해주세요.',
-                    value: null
-                  }}
-                  onValueChange={this.props.onValueChange('univ')}
-                  items={IN_SEOUL}
-                />
-              </PickerBox>
-              <ErrorBox>
-                {errors.univ &&
-                  errors.univ.map((e, index) => (
-                    <ErrorText key={index}>{e}</ErrorText>
-                  ))}
-              </ErrorBox>
-            </UnivField>
-            <GenderField>
-              <PickerBox>
-                <RNPickerSelect
-                  value={gender}
-                  placeholder={{
-                    label: '성별을 선택해주세요.',
-                    value: null,
-                    color: 'black'
-                  }}
-                  style={{
-                    ...style,
-                    placeholder: { color: colors.TEXT_COLOR }
-                  }}
-                  onValueChange={this.props.onValueChange('gender')}
-                  items={[
-                    { label: '남자', value: 'M' },
-                    { label: '여자', value: 'F' }
-                  ]}
-                />
-              </PickerBox>
-              <ErrorBox>
-                {errors.gender &&
-                  errors.gender.map((e, index) => (
-                    <ErrorText key={index}>{e}</ErrorText>
-                  ))}
-              </ErrorBox>
-            </GenderField>
-          </Container>
-        </FormContainer>
-        <ButtonContainer>
-          <SubmitButton onPressOut={this.props.submit}>
-            {isSubmitting ? (
-              <ActivityIndicator />
-            ) : (
-              <SubmitText>프로필 만들기</SubmitText>
-            )}
-          </SubmitButton>
-        </ButtonContainer>
-      </Screen>
+      <>
+        <SafeZone />
+        <Screen>
+          <FormContainer>
+            <Container>
+              <AvatarField>
+                <AddAvatarImage onPressOut={this.props.uploadAvatar}>
+                  {avatar.uri ? (
+                    <Avatar source={{ uri: avatar.uri }} />
+                  ) : (
+                    <Avatar source={Icon.profile} />
+                  )}
+                </AddAvatarImage>
+                <ErrorBox>
+                  {errors.avatar &&
+                    errors.avatar.map((e, index) => (
+                      <ErrorText key={index}>{e}</ErrorText>
+                    ))}
+                </ErrorBox>
+              </AvatarField>
+              <NameField>
+                <InputBox>
+                  <InputText
+                    value={name}
+                    onChangeText={this.props.onValueChange('name')}
+                    placeholder="이름"
+                    returnKeyType="next"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                  />
+                </InputBox>
+                <ErrorBox>
+                  {errors.name &&
+                    errors.name.map((e, index) => (
+                      <ErrorText key={index}>{e}</ErrorText>
+                    ))}
+                </ErrorBox>
+              </NameField>
+              <LocationField>
+                <PickerBox>
+                  <RNPickerSelect
+                    value={location}
+                    style={{
+                      ...style,
+                      placeholder: { color: colors.TEXT_COLOR }
+                    }}
+                    placeholder={{ label: '원하는 미팅 장소', value: null }}
+                    onValueChange={this.props.onValueChange('location')}
+                    items={SEOUL}
+                  />
+                </PickerBox>
+                <ErrorBox>
+                  {errors.location &&
+                    errors.location.map((e, index) => (
+                      <ErrorText key={index}>{e}</ErrorText>
+                    ))}
+                </ErrorBox>
+              </LocationField>
+              <UnivField>
+                <PickerBox>
+                  <RNPickerSelect
+                    value={univ}
+                    style={{
+                      ...style,
+                      placeholder: { color: colors.TEXT_COLOR }
+                    }}
+                    placeholder={{
+                      label: '대학을 선택해주세요.',
+                      value: null
+                    }}
+                    onValueChange={this.props.onValueChange('univ')}
+                    items={IN_SEOUL}
+                  />
+                </PickerBox>
+                <ErrorBox>
+                  {errors.univ &&
+                    errors.univ.map((e, index) => (
+                      <ErrorText key={index}>{e}</ErrorText>
+                    ))}
+                </ErrorBox>
+              </UnivField>
+              <GenderField>
+                <PickerBox>
+                  <RNPickerSelect
+                    value={gender}
+                    placeholder={{
+                      label: '성별을 선택해주세요.',
+                      value: null,
+                      color: 'black'
+                    }}
+                    style={{
+                      ...style,
+                      placeholder: { color: colors.TEXT_COLOR }
+                    }}
+                    onValueChange={this.props.onValueChange('gender')}
+                    items={[
+                      { label: '남자', value: 'M' },
+                      { label: '여자', value: 'F' }
+                    ]}
+                  />
+                </PickerBox>
+                <ErrorBox>
+                  {errors.gender &&
+                    errors.gender.map((e, index) => (
+                      <ErrorText key={index}>{e}</ErrorText>
+                    ))}
+                </ErrorBox>
+              </GenderField>
+            </Container>
+          </FormContainer>
+          <ButtonContainer>
+            <SubmitButton onPressOut={this.props.submit}>
+              {isSubmitting ? (
+                <ActivityIndicator />
+              ) : (
+                <SubmitText>프로필 만들기</SubmitText>
+              )}
+            </SubmitButton>
+          </ButtonContainer>
+        </Screen>
+      </>
     );
   }
 }
@@ -267,4 +279,5 @@ const ErrorBox = styled.View`
 
 const ErrorText = styled.Text`
   font-size: 14px;
+  color: ${colors.ERROR_TEXT};
 `;

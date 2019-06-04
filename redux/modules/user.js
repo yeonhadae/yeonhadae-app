@@ -1,6 +1,6 @@
 // imports
 
-import api, { loginApi, endPoints } from '../../constants/apis';
+import api, { loginApi, endPoints, fileApi } from '../../constants/apis';
 import { AsyncStorage } from 'react-native';
 // Actions
 
@@ -43,11 +43,9 @@ function validateToken(id, username, token) {
     api(token)
       .post(endPoints.validateToken(id), { username })
       .then(response => {
-        console.log(response.data);
         return true;
       })
       .catch(e => {
-        console.log('에러임');
         return false;
       });
 }
@@ -61,15 +59,14 @@ function signup(form) {
 
 function createProfile(form) {
   return (dispatch, getState) => {
-    console.log(getState());
     const {
       user: {
         token,
         account: { id }
       }
     } = getState();
-    return api(token)
-      .post(endPoints.createProfile(id), { ...form })
+    return fileApi(token)
+      .post(endPoints.createProfile(id), form)
       .then(response => {
         dispatch(setProfile(response.data));
       });
@@ -81,12 +78,14 @@ function login(username, password) {
     loginApi
       .post(endPoints.login, { username, password })
       .then(response => {
-        const { access: token, account } = response.data;
+        const { access: token, account, profile } = response.data;
         if (token && account) {
           account.password = password;
           dispatch(setUser(account));
           dispatch(setLogin(token));
-          console.log(getState());
+          if (profile) {
+            dispatch(setProfile(profile));
+          }
           return true;
         } else {
           console.log('access 또는 account가 제공되지 않았음');

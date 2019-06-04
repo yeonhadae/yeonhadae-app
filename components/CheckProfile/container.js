@@ -1,5 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Text } from 'react-native';
+import Loading from '../Loading';
 
-export default () => <Text>Test</Text>;
+export default class extends React.Component {
+  static propTypes = {
+    profile: PropTypes.object
+  };
+
+  _checkProfile() {
+    const {
+      profile,
+      navigation: { navigate }
+    } = this.props;
+    console.log(profile);
+    if (profile) {
+      navigate('MainNavigator');
+    } else {
+      navigate('ProfileCreateScreen');
+    }
+  }
+
+  componentWillMount() {
+    this._checkProfile();
+  }
+
+  render() {
+    return <Loading />;
+  }
+}

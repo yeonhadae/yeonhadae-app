@@ -45,16 +45,20 @@ export default class extends React.Component {
         weight,
         religion,
         is_smoker,
-        avatar: { base64: avatar }
+        avatar: { uri: avatar }
       } = this.state);
+
+      const data = new FormData();
+      for (key in form) {
+        data.append(key, form[key]);
+      }
 
       const { createProfile } = this.props;
 
       try {
-        const result = await createProfile(form);
+        const result = await createProfile(data);
       } catch (e) {
-        console.log(e.response.data);
-        console.log(e.response.status);
+        this.setState({ errors: e.response.data, isSubmitting: false });
       }
     }
   }

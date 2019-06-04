@@ -22,6 +22,7 @@ export default class extends React.Component {
       navigation: { navigate },
       validateToken
     } = this.props;
+
     if (isLoggedIn) {
       if (!account) {
         console.log('계정 정보가 없음');
@@ -49,6 +50,7 @@ export default class extends React.Component {
           navigate('AccountNavigator');
           return;
         }
+        navigate('CheckProfile');
       }
     } else {
       console.log('로그인이 안되어있음');
