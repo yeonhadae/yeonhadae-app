@@ -1,14 +1,15 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = 'http://d41b1932.ngrok.io';
 
 export const endPoints = {
-  login: '/accounts/login/',
-  signup: '/accounts/signup/',
+  login: '/auth/login/',
+  signup: '/auth/signup/',
   validateToken: id => `/users/${id}/api/validate-token/`,
   createProfile: id => `/users/${id}/`,
   sendMailToken: id => `/users/${id}/token/`,
-  emailVerification: id => `/users/${id}/verification/`
+  emailVerification: id => `/users/${id}/verification/`,
+  setNotificationToken: id => `/users/${id}/notification/`
 };
 
 export const loginApi = axios.create({

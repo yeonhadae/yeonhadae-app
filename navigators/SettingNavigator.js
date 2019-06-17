@@ -1,9 +1,9 @@
-import { createAppContainer, createStackNavigator } from "react-navigation";
+import { createStackNavigator } from 'react-navigation';
 
-import SettingScreen from "../screens/SettingScreen";
-import FAQScreen from "../screens/FAQScreen";
-import AccountScreen from "../screens/AccountScreen";
-import HowToScreen from "../screens/HowToScreen";
+import SettingScreen from '../screens/SettingScreen';
+import FAQScreen from '../screens/FAQScreen';
+import AccountScreen from '../screens/AccountScreen';
+import HowToScreen from '../screens/HowToScreen';
 
 export default createStackNavigator(
   {
@@ -13,8 +13,8 @@ export default createStackNavigator(
     howTo: HowToScreen
   },
   {
-    headerMode: "screen",
-    initialRouteName: "default",
+    headerMode: 'screen',
+    initialRouteName: 'default',
     headerBackTitleVisible: false
   }
 );

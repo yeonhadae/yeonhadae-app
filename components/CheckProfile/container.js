@@ -13,9 +13,8 @@ export default class extends React.Component {
       profile,
       navigation: { navigate }
     } = this.props;
-    console.log(profile);
     if (profile) {
-      navigate('MainNavigator');
+      navigate('MainScreen');
     } else {
       navigate('ProfileCreateScreen');
     }

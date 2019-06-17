@@ -7,7 +7,7 @@ import { StyleSheet, ActivityIndicator } from 'react-native';
 import colors from '../../constants/colors';
 import Icon from '../../components/Icon';
 import device from '../../constants/device';
-import SafeZone from '../../components/MainTopSafeArea';
+import SafeZone from '../../components/TopSafeArea';
 import { SEOUL } from '../../constants/locations';
 import { IN_SEOUL } from '../../constants/universities';
 
