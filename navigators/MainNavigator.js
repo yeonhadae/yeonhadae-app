@@ -3,8 +3,8 @@ import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 import colors from '../constants/colors';
 import Meeting from '../screens/MeetingScreen';
-import Chat from '../screens/MeetingScreen';
-import Profile from '../screens/MeetingScreen';
+import Friends from '../screens/FriendsScreen';
+import Profile from '../screens/ProfileScreen';
 import Setting from './SettingNavigator';
 import { TabBarIcon } from '../components/Icon';
 
@@ -25,13 +25,13 @@ export default createAppContainer(
         }
       },
       Chat: {
-        screen: Chat,
+        screen: Friends,
         navigationOptions: {
-          title: '채팅',
+          title: '친구',
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
-              name="chat"
-              size={24}
+              name="friends"
+              size={30}
               color={focused ? colors.TINT_COLOR : colors.UNSELECTED_ICON}
             />
           )

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import friends from '../assets/friends.png';
 import setting from '../assets/setting.png';
 import meeting from '../assets/meeting.png';
 import profile from '../assets/profile.png';
@@ -25,7 +26,8 @@ imageFile = {
   signupEmail,
   signupPassword,
   signupPasswordCheck,
-  signup_profile
+  signup_profile,
+  friends
 };
 
 export const TabBarIcon = ({ name, size, color }) => (

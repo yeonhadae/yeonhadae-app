@@ -1,5 +1,6 @@
 import React from 'react';
-import { ImagePicker, Permissions } from 'expo';
+import * as Permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
 import Presenter from './presenter';
 
 export default class extends React.Component {
