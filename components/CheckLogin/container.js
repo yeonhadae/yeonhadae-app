@@ -53,7 +53,6 @@ export default class extends React.Component {
         navigate('CheckProfile');
       }
     } else {
-      console.log('로그인이 안되어있음');
       navigate('AccountNavigator');
       return;
     }
