@@ -9,7 +9,10 @@ export const endPoints = {
   createProfile: id => `/users/${id}/`,
   sendMailToken: id => `/users/${id}/token/`,
   emailVerification: id => `/users/${id}/verification/`,
-  setNotificationToken: id => `/users/${id}/notification/`
+  setNotificationToken: id => `/users/${id}/notification/`,
+  followingList: `/users/following/list/`,
+  followerList: `/users/follower/list`,
+  followTarget: target_id => `/users/follow/${target_id}/`
 };
 
 export const loginApi = axios.create({

@@ -7,11 +7,11 @@ const LoadingContainer = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${colors.MAIN_COLOR};
+  background-color: ${props => props.bgColor};
 `;
 
-export default () => (
-  <LoadingContainer>
+export default props => (
+  <LoadingContainer bgColor={props.bgColor || colors.MAIN_COLOR}>
     <ActivityIndicator />
   </LoadingContainer>
 );
