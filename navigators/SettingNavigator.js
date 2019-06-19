@@ -7,7 +7,7 @@ import HowToScreen from '../screens/HowToScreen';
 
 export default createStackNavigator(
   {
-    default: { screen: SettingScreen, navigationOptions: { header: null } },
+    default: { screen: SettingScreen },
     FAQ: FAQScreen,
     account: AccountScreen,
     howTo: HowToScreen

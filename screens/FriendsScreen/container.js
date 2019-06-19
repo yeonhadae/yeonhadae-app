@@ -1,6 +1,7 @@
 import React from 'react';
 import Presenter from './presenter';
 import api, { endPoints } from '../../constants/apis';
+
 export default class extends React.Component {
   state = {
     friends: [],
@@ -19,9 +20,19 @@ export default class extends React.Component {
     this.setState({ friends, loading: false });
   }
 
-  _onPressProfile() {}
+  _onPressProfile(profile) {
+    const {
+      navigation: { navigate }
+    } = this.props;
+    navigate('Profile', { profile });
+  }
 
   render() {
-    return <Presenter {...this.state} />;
+    return (
+      <Presenter
+        {...this.state}
+        onPressProfile={this._onPressProfile.bind(this)}
+      />
+    );
   }
 }

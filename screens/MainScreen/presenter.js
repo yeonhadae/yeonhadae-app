@@ -42,7 +42,6 @@ export default class extends React.Component {
   render() {
     return (
       <>
-        <MainTopSafeArea backgroundColor={'transparent'} />
         <MainNavigator navigation={this.props.navigation} />
       </>
     );

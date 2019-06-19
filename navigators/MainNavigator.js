@@ -3,8 +3,8 @@ import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 import colors from '../constants/colors';
 import Meeting from '../screens/MeetingScreen';
-import Friends from '../screens/FriendsScreen';
-import Profile from '../screens/ProfileScreen';
+import Friends from './FriendsNavigator';
+import MyProfile from '../screens/MyProfileScreen';
 import Setting from './SettingNavigator';
 import { TabBarIcon } from '../components/Icon';
 
@@ -24,7 +24,7 @@ export default createAppContainer(
           )
         }
       },
-      Chat: {
+      Friends: {
         screen: Friends,
         navigationOptions: {
           title: '친구',
@@ -37,10 +37,10 @@ export default createAppContainer(
           )
         }
       },
-      Profile: {
-        screen: Profile,
+      MyProfile: {
+        screen: MyProfile,
         navigationOptions: {
-          title: '프로필',
+          title: '마이페이지',
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               name="profile"
@@ -65,6 +65,7 @@ export default createAppContainer(
       }
     },
     {
+      initialRouteName: 'Friends',
       tabBarOptions: {
         inactiveTintColor: colors.UNSELECTED_ICON,
         activeTintColor: colors.TINT_COLOR,
