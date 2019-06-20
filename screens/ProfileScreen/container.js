@@ -8,7 +8,7 @@ export default class extends React.Component {
   };
   async componentWillMount() {
     const {
-      userProfile: { follower },
+      token,
       navigation: {
         state: {
           params: {
@@ -17,7 +17,12 @@ export default class extends React.Component {
         }
       }
     } = this.props;
-    if (id in follower) {
+
+    const {
+      data: { following }
+    } = await api(token).get(endPoints.followingList);
+
+    if (following.find(flw => flw.id === id)) {
       this.setState({ isFriend: true });
     }
   }
@@ -25,6 +30,7 @@ export default class extends React.Component {
   async _followUnfollow() {
     const {
       token,
+      userProfile: { following },
       navigation: {
         state: {
           params: {
@@ -38,7 +44,7 @@ export default class extends React.Component {
     } else {
       await api(token).post(endPoints.followTarget(target_id));
     }
-    this.setState({ isFriend: !isFriend });
+    this.setState({ isFriend: !this.state.isFriend });
   }
 
   render() {
@@ -46,7 +52,7 @@ export default class extends React.Component {
       <Presenter
         profile={this.props.navigation.state.params.profile}
         isFriend={this.state.isFriend}
-        followUnfollow={this._followUnfollow}
+        followUnfollow={this._followUnfollow.bind(this)}
       />
     );
   }

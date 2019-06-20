@@ -11,7 +11,7 @@ export const endPoints = {
   emailVerification: id => `/users/${id}/verification/`,
   setNotificationToken: id => `/users/${id}/notification/`,
   followingList: `/users/following/list/`,
-  followerList: `/users/follower/list`,
+  followerList: `/users/follower/list/`,
   followTarget: target_id => `/users/follow/${target_id}/`
 };
 

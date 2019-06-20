@@ -43,7 +43,7 @@ export default createAppContainer(
           title: '마이페이지',
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
-              name="profile"
+              name="myProfile"
               size={24}
               color={focused ? colors.TINT_COLOR : colors.UNSELECTED_ICON}
             />

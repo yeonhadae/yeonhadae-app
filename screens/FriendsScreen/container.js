@@ -27,11 +27,19 @@ export default class extends React.Component {
     navigate('Profile', { profile });
   }
 
+  _onPressFollowerList() {
+    const {
+      navigation: { navigate }
+    } = this.props;
+    navigate('Follower');
+  }
+
   render() {
     return (
       <Presenter
         {...this.state}
         onPressProfile={this._onPressProfile.bind(this)}
+        onPressFollowerList={this._onPressFollowerList.bind(this)}
       />
     );
   }

@@ -6,7 +6,8 @@ import nomatching from '../assets/nomatching.png';
 import friends from '../assets/friends.png';
 import setting from '../assets/setting.png';
 import meeting from '../assets/meeting.png';
-import profile from '../assets/profile.png';
+import myProfile from '../assets/my_profile.png';
+import friendProfile from '../assets/friend_profile.png';
 import chat from '../assets/chat.png';
 import username from '../assets/username.png';
 import password from '../assets/password.png';
@@ -14,12 +15,13 @@ import logo from '../assets/yeonhadae.png';
 import signupEmail from '../assets/signup_email.png';
 import signupPasswordCheck from '../assets/signup_password_check.png';
 import signupPassword from '../assets/signup_password.png';
-import signup_profile from '../assets/signup_profile.png';
+import signupProfile from '../assets/signup_profile.png';
 
 imageFile = {
   logo,
   meeting,
-  profile,
+  friendProfile,
+  myProfile,
   chat,
   setting,
   username,
@@ -27,7 +29,7 @@ imageFile = {
   signupEmail,
   signupPassword,
   signupPasswordCheck,
-  signup_profile,
+  signupProfile,
   friends,
   nomatching
 };
